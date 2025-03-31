@@ -30,23 +30,24 @@ function App() {
   }
 
   const listElements = (listItems.length > 0) && listItems.map((item, index) => {
-    return (<li key={index}>
+    const struckItemClass = item.isStruck ? "list-item struck" : "list-item unstruck"
+    
+    return (<li key={index} className={index > 0 ? "top-border" : ""}>
     <span
     onClick={() => strikeItem(index)}
-    className={item.isStruck ? "list-item struck" : "list-item unstruck"}>{item.text}</span>
+    className={struckItemClass}>{item.text}</span>
     <span className="delete" onClick={() => removeItem(index)}>x</span></li>)
   })
 
   return (
     <main>
-        <h1>To-do List</h1>
-        <p>Add an item to the to-do list</p>
         <form onSubmit={addTask}>
           <label htmlFor="task"></label>
           <input type="text" id="task" name="task" />
           <button type="submit">Add Task</button>
         </form>
         <section className='list-items'>
+        <h2 className="title">To-do List</h2>
           <ul>
             {listElements}
           </ul>
